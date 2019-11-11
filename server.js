@@ -1,10 +1,11 @@
 const express = require('express');
-const userRouter = require('./users/router');
+
+const apiRouter = require('./api-router');
+const configureMiddleware = require('./configure-middleware');
+
 const server = express();
 
-server.use(json());
-server.use('/api/users', userRouter);
+configureMiddleware(server);
+server.use('/api', apiRouter);
 
-server.get('/', (req, res) => {
-  res.status(200).json({ message: 'USER DATABASE' });
-});
+module.exports = server;
